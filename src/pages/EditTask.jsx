@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import axios from "axios";
 import { useCookies } from "react-cookie";
@@ -68,7 +68,7 @@ export const EditTask = () => {
     .catch((err) => {
       setErrorMessage(`タスク情報の取得に失敗しました。${err}`);
     })
-  }, [])
+  }, [listId, taskId, cookies.token])
 
   return (
     <div>
@@ -77,10 +77,14 @@ export const EditTask = () => {
         <h2>タスク編集</h2>
         <p className="error-message">{errorMessage}</p>
         <form className="edit-task-form">
-          <label>タイトル</label><br />
-          <input type="text" onChange={handleTitleChange} className="edit-task-title" value={title} /><br />
-          <label>詳細</label><br />
-          <textarea type="text" onChange={handleDetailChange} className="edit-task-detail" value={detail} /><br />
+          <label>
+            タイトル<br />
+            <input type="text" onChange={handleTitleChange} className="edit-task-title" value={title} /><br />
+          </label>
+          <label>
+            詳細<br />
+            <textarea type="text" onChange={handleDetailChange} className="edit-task-detail" value={detail} /><br />
+          </label>
           <div>
             <input type="radio" id="todo" name="status" value="todo" onChange={handleIsDoneChange} checked={isDone === false ? "checked" : ""} />未完了
             <input type="radio" id="done" name="status" value="done" onChange={handleIsDoneChange} checked={isDone === true ? "checked" : ""} />完了

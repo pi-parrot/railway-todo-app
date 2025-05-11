@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Header } from "../components/Header";
@@ -37,8 +37,10 @@ export const NewList = () => {
         <h2>リスト新規作成</h2>
         <p className="error-message">{errorMessage}</p>
         <form className="new-list-form">
-          <label>タイトル</label><br />
-          <input type="text" onChange={handleTitleChange} className="new-list-title" /><br />
+          <label>
+            タイトル<br />
+            <input type="text" onChange={handleTitleChange} className="new-list-title" />
+          </label><br />
           <button type="button" onClick={onCreateList} className="new-list-button">作成</button>
         </form>
       </main>
