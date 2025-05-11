@@ -1,10 +1,10 @@
 import { createRoot } from "react-dom/client";
 import "./index.scss";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import App from "./App.js";
+import reportWebVitals from "./reportWebVitals.js";
 import { CookiesProvider } from "react-cookie";
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { store } from "./store.js";
 
 // React 18 以降では ReactDOM.render は非推奨のため
 // createRoot に置換
