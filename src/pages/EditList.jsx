@@ -11,53 +11,56 @@ export const EditList = () => {
   const { listId } = useParams();
   const [title, setTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [ cookies ] = useCookies();
+  const [cookies] = useCookies();
   const handleTitleChange = (e) => setTitle(e.target.value);
   const onUpdateList = () => {
     const data = {
-      title: title
-    }
+      title: title,
+    };
 
-    axios.put(`${url}/lists/${listId}`, data, {
-      headers: {
-        authorization: `Bearer ${cookies.token}`
-      }
-    })
-    .then(() => {
-      history.push("/");
-    })
-    .catch((err) => {
-    setErrorMessage(`更新に失敗しました。 ${err}`);
-    })
-  }
+    axios
+      .put(`${url}/lists/${listId}`, data, {
+        headers: {
+          authorization: `Bearer ${cookies.token}`,
+        },
+      })
+      .then(() => {
+        history.push("/");
+      })
+      .catch((err) => {
+        setErrorMessage(`更新に失敗しました。 ${err}`);
+      });
+  };
 
   const onDeleteList = () => {
-    axios.delete(`${url}/lists/${listId}`, {
-      headers: {
-        authorization: `Bearer ${cookies.token}`
-      }
-    })
-    .then(() => {
-      history.push("/");
-    })
-    .catch((err) => {
-      setErrorMessage(`削除に失敗しました。${err}`);
-    })
-  }
+    axios
+      .delete(`${url}/lists/${listId}`, {
+        headers: {
+          authorization: `Bearer ${cookies.token}`,
+        },
+      })
+      .then(() => {
+        history.push("/");
+      })
+      .catch((err) => {
+        setErrorMessage(`削除に失敗しました。${err}`);
+      });
+  };
 
   useEffect(() => {
-    axios.get(`${url}/lists/${listId}`, {
-      headers: {
-        authorization: `Bearer ${cookies.token}`
-      }
-    })
-    .then((res) => {
-      const list = res.data;
-      setTitle(list.title);
-    })
-    .catch((err) => {
-      setErrorMessage(`リスト情報の取得に失敗しました。${err}`);
-    });
+    axios
+      .get(`${url}/lists/${listId}`, {
+        headers: {
+          authorization: `Bearer ${cookies.token}`,
+        },
+      })
+      .then((res) => {
+        const list = res.data;
+        setTitle(list.title);
+      })
+      .catch((err) => {
+        setErrorMessage(`リスト情報の取得に失敗しました。${err}`);
+      });
   }, [listId, cookies.token]);
 
   return (
@@ -68,13 +71,32 @@ export const EditList = () => {
         <p className="error-message">{errorMessage}</p>
         <form className="edit-list-form">
           <label>
-            タイトル<br />
-            <input type="text" className="edit-list-title" value={title} onChange={handleTitleChange} />
-          </label><br />
-          <button type="button" className="delete-list-button" onClick={onDeleteList}>削除</button>
-          <button type="button" className="edit-list-button" onClick={onUpdateList}>更新</button>
+            タイトル
+            <br />
+            <input
+              type="text"
+              className="edit-list-title"
+              value={title}
+              onChange={handleTitleChange}
+            />
+          </label>
+          <br />
+          <button
+            type="button"
+            className="delete-list-button"
+            onClick={onDeleteList}
+          >
+            削除
+          </button>
+          <button
+            type="button"
+            className="edit-list-button"
+            onClick={onUpdateList}
+          >
+            更新
+          </button>
         </form>
       </main>
     </div>
-  )
-}
+  );
+};

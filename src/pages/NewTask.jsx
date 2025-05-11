@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import { url } from "../const";
 import { Header } from "../components/Header";
-import "./newTask.scss"
+import "./newTask.scss";
 import { useHistory } from "react-router-dom";
 
 // 残り日時を計算して表示する関数
@@ -54,33 +54,35 @@ export const NewTask = () => {
       limit: formattedLimit,
     };
 
-    axios.post(`${url}/lists/${selectListId}/tasks`, data, {
+    axios
+      .post(`${url}/lists/${selectListId}/tasks`, data, {
         headers: {
-          authorization: `Bearer ${cookies.token}`
-        }
-    })
-    .then(() => {
-      history.push("/");
-    })
-    .catch((err) => {
-      setErrorMessage(`タスクの作成に失敗しました。${err}`);
-    })
-  }
+          authorization: `Bearer ${cookies.token}`,
+        },
+      })
+      .then(() => {
+        history.push("/");
+      })
+      .catch((err) => {
+        setErrorMessage(`タスクの作成に失敗しました。${err}`);
+      });
+  };
 
   useEffect(() => {
-    axios.get(`${url}/lists`, {
-      headers: {
-        authorization: `Bearer ${cookies.token}`
-      }
-    })
-    .then((res) => {
-      setLists(res.data)
-      setSelectListId(res.data[0]?.id)
-    })
-    .catch((err) => {
-      setErrorMessage(`リストの取得に失敗しました。${err}`);
-    })
-  }, [cookies.token])
+    axios
+      .get(`${url}/lists`, {
+        headers: {
+          authorization: `Bearer ${cookies.token}`,
+        },
+      })
+      .then((res) => {
+        setLists(res.data);
+        setSelectListId(res.data[0]?.id);
+      })
+      .catch((err) => {
+        setErrorMessage(`リストの取得に失敗しました。${err}`);
+      });
+  }, [cookies.token]);
 
   return (
     <div>
@@ -90,31 +92,61 @@ export const NewTask = () => {
         <p className="error-message">{errorMessage}</p>
         <form className="new-task-form">
           <label>
-            リスト<br />
-            <select onChange={(e) => handleSelectList(e.target.value)} className="new-task-select-list">
+            リスト
+            <br />
+            <select
+              onChange={(e) => handleSelectList(e.target.value)}
+              className="new-task-select-list"
+            >
               {lists.map((list) => (
                 <option key={list.id} className="list-item" value={list.id}>
                   {list.title}
                 </option>
               ))}
-            </select><br />
+            </select>
+            <br />
           </label>
           <label>
-            タイトル<br />
-            <input type="text" onChange={handleTitleChange} className="new-task-title" /><br />
+            タイトル
+            <br />
+            <input
+              type="text"
+              onChange={handleTitleChange}
+              className="new-task-title"
+            />
+            <br />
           </label>
           <label>
-            詳細<br />
-            <textarea type="text" onChange={handleDetailChange} className="new-task-detail" /><br />
+            詳細
+            <br />
+            <textarea
+              type="text"
+              onChange={handleDetailChange}
+              className="new-task-detail"
+            />
+            <br />
           </label>
           <label>
-            期限<br />
-            <input type="datetime-local" className="new-task-limit" value={limit} onChange={handleLimitChange} />
+            期限
+            <br />
+            <input
+              type="datetime-local"
+              className="new-task-limit"
+              value={limit}
+              onChange={handleLimitChange}
+            />
           </label>
-          {limit ? `残り日時：${getRemainingTime(limit)}` : ""}<br />
-          <button type="button" className="new-task-button" onClick={onCreateTask}>作成</button>
+          {limit ? `残り日時：${getRemainingTime(limit)}` : ""}
+          <br />
+          <button
+            type="button"
+            className="new-task-button"
+            onClick={onCreateTask}
+          >
+            作成
+          </button>
         </form>
       </main>
     </div>
-  )
-}
+  );
+};

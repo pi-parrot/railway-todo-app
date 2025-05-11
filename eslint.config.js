@@ -1,13 +1,13 @@
-import js from '@eslint/js';
-import eslintPluginReact from 'eslint-plugin-react';
+import js from "@eslint/js";
+import eslintPluginReact from "eslint-plugin-react";
 
 export default [
   js.configs.recommended,
   {
-    ignores: ['node_modules/**', 'dist/**'],
+    ignores: ["node_modules/**", "dist/**"],
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: 'module',
+      sourceType: "module",
       parserOptions: {
         ecmaFeatures: {
           // JSX構文を有効化
@@ -17,17 +17,17 @@ export default [
       // ブラウザやテスト環境で使うグローバル変数を
       // 未定義エラーなく使えるようにする
       globals: {
-        window: 'readonly',
-        document: 'readonly',
-        navigator: 'readonly',
-        console: 'readonly',
-        setTimeout: 'readonly',
-        clearTimeout: 'readonly',
-        setInterval: 'readonly',
-        clearInterval: 'readonly',
-        test: 'readonly',
-        expect: 'readonly',
-        process: 'readonly',
+        window: "readonly",
+        document: "readonly",
+        navigator: "readonly",
+        console: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        test: "readonly",
+        expect: "readonly",
+        process: "readonly",
       },
     },
     plugins: {
@@ -36,10 +36,10 @@ export default [
     },
     rules: {
       // 未使用変数をエラーにする
-      'no-unused-vars': 'error',
+      "no-unused-vars": "error",
       // JSX内で使われている変数も
       // no-unused-varsの対象として認識する
-      'react/jsx-uses-vars': 'error',
+      "react/jsx-uses-vars": "error",
       /* React 17以降では不要
       'react/jsx-uses-react': 'error',
       'react/react-in-jsx-scope': 'error',

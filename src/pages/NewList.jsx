@@ -14,21 +14,22 @@ export const NewList = () => {
   const handleTitleChange = (e) => setTitle(e.target.value);
   const onCreateList = () => {
     const data = {
-      title: title
-    }
+      title: title,
+    };
 
-    axios.post(`${url}/lists`, data, {
-      headers: {
-        authorization: `Bearer ${cookies.token}`
-      }
-    })
-    .then(() => {
-      history.push("/");
-    })
-    .catch((err) => {
-      setErrorMessage(`リストの作成に失敗しました。${err}`);
-    })
-  }
+    axios
+      .post(`${url}/lists`, data, {
+        headers: {
+          authorization: `Bearer ${cookies.token}`,
+        },
+      })
+      .then(() => {
+        history.push("/");
+      })
+      .catch((err) => {
+        setErrorMessage(`リストの作成に失敗しました。${err}`);
+      });
+  };
 
   return (
     <div>
@@ -38,12 +39,24 @@ export const NewList = () => {
         <p className="error-message">{errorMessage}</p>
         <form className="new-list-form">
           <label>
-            タイトル<br />
-            <input type="text" onChange={handleTitleChange} className="new-list-title" />
-          </label><br />
-          <button type="button" onClick={onCreateList} className="new-list-button">作成</button>
+            タイトル
+            <br />
+            <input
+              type="text"
+              onChange={handleTitleChange}
+              className="new-list-title"
+            />
+          </label>
+          <br />
+          <button
+            type="button"
+            onClick={onCreateList}
+            className="new-list-button"
+          >
+            作成
+          </button>
         </form>
       </main>
     </div>
-  )
-}
+  );
+};
