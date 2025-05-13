@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Header } from "../components/Header";
+import { Button } from "../components/Button";
 import { useHistory } from "react-router-dom";
 import { url } from "../const";
 import "./newList.scss";
@@ -48,13 +49,9 @@ export const NewList = () => {
             />
           </label>
           <br />
-          <button
-            type="button"
-            onClick={onCreateList}
-            className="new-list-button"
-          >
+          <Button type="button" onClick={onCreateList}>
             作成
-          </button>
+          </Button>
         </form>
       </main>
     </div>

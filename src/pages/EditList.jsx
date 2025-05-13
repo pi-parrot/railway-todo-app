@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useHistory, useParams } from "react-router-dom";
 import { Header } from "../components/Header";
+import { Button } from "../components/Button";
 import { url } from "../const";
 import "./editList.scss";
 
@@ -81,20 +82,12 @@ export const EditList = () => {
             />
           </label>
           <br />
-          <button
-            type="button"
-            className="delete-list-button"
-            onClick={onDeleteList}
-          >
+          <Button type="button" onClick={onDeleteList} variant="delete">
             削除
-          </button>
-          <button
-            type="button"
-            className="edit-list-button"
-            onClick={onUpdateList}
-          >
+          </Button>
+          <Button type="button" onClick={onUpdateList}>
             更新
-          </button>
+          </Button>
         </form>
       </main>
     </div>

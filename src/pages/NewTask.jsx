@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import { url } from "../const";
 import { Header } from "../components/Header";
+import { Button } from "../components/Button";
 import "./newTask.scss";
 import { useHistory } from "react-router-dom";
 
@@ -138,13 +139,9 @@ export const NewTask = () => {
           </label>
           {limit ? `残り日時：${getRemainingTime(limit)}` : ""}
           <br />
-          <button
-            type="button"
-            className="new-task-button"
-            onClick={onCreateTask}
-          >
+          <Button type="button" onClick={onCreateTask}>
             作成
-          </button>
+          </Button>
         </form>
       </main>
     </div>

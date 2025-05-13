@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
+import { Button } from "../components/Button";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { url } from "../const";
@@ -171,20 +172,12 @@ export const EditTask = () => {
             />
             完了
           </div>
-          <button
-            type="button"
-            className="delete-task-button"
-            onClick={onDeleteTask}
-          >
+          <Button type="button" onClick={onDeleteTask} variant="delete">
             削除
-          </button>
-          <button
-            type="button"
-            className="edit-task-button"
-            onClick={onUpdateTask}
-          >
+          </Button>
+          <Button type="button" onClick={onUpdateTask}>
             更新
-          </button>
+          </Button>
         </form>
       </main>
     </div>
