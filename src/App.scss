@@ -1,13 +1,13 @@
 .app_layout {
   display: flex;
-  min-height: calc(100vh - 80px); /* ヘッダーの高さを引く */
+  min-height: 100vh; /* ヘッダーがないので100vhに変更 */
 }
 
 .main_content {
   flex: 1;
   margin-left: 320px; /* サイドバーの幅 */
   padding: 2rem;
-  min-height: calc(100vh - 80px);
+  min-height: 100vh; /* ヘッダーがないので100vhに変更 */
   overflow-y: auto;
 }
 
@@ -16,6 +16,6 @@
   .main_content {
     margin-left: 0;
     width: 100%;
-    padding-top: 5rem; /* ハンバーガーメニューボタンのスペースを確保 */
+    padding-top: 4rem; /* ハンバーガーメニューボタンのスペースを確保 */
   }
 }

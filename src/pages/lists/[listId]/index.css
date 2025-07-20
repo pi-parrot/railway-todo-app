@@ -42,3 +42,10 @@
   color: var(--slate-500);
   font-size: 0.875rem;
 }
+
+/* モバイル表示時にリストタイトルがハンバーガーボタンと重ならないよう調整 */
+@media (max-width: 768px) {
+  .tasks_list__title {
+    margin-top: 1rem; /* ハンバーガーボタンとの十分なスペースを確保 */
+  }
+}
