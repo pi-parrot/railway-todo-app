@@ -74,3 +74,10 @@
   font-size: 1rem;
   color: var(--slate-500);
 }
+
+.task_item__limit {
+  font-size: 0.875rem;
+  color: var(--indigo-600);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}

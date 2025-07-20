@@ -83,6 +83,27 @@
   outline: none;
 }
 
+.task_create_form__limit {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font: inherit;
+  background: transparent;
+  color: var(--slate-500);
+  border: none;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.task_create_form__limit:focus {
+  outline: none;
+}
+
+.task_create_form__remaining_time {
+  font-size: 0.875rem;
+  color: var(--slate-600);
+  margin-top: 0.25rem;
+}
+
 .task_create_form__actions {
   margin-top: 1rem;
   display: flex;

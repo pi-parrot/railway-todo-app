@@ -12,7 +12,7 @@ export const listSlice = createSlice({
   name: 'list',
   initialState,
   reducers: {
-    resetList: (state, _action) => {
+    resetList: (state) => {
       state.lists = null
       state.current = null
       state.isLoading = false
@@ -41,7 +41,7 @@ export const listSlice = createSlice({
     removeList: (state, action) => {
       const id = action.payload.id
 
-      state.lists = state.lists.filter(list => list.id !== id)
+      state.lists = state.lists.filter((list) => list.id !== id)
 
       if (state.current === id) {
         state.current = state.lists[0]?.id || null
@@ -51,7 +51,7 @@ export const listSlice = createSlice({
       const id = action.payload.id
       const title = action.payload.title
 
-      state.lists = state.lists.map(list => {
+      state.lists = state.lists.map((list) => {
         if (list.id === id) {
           list.title = title
         }
@@ -95,7 +95,7 @@ export const fetchLists = createAsyncThunk(
     } finally {
       thunkApi.dispatch(setListIsLoading(false))
     }
-  },
+  }
 )
 
 export const createList = createAsyncThunk(
@@ -109,7 +109,7 @@ export const createList = createAsyncThunk(
     } catch (e) {
       return handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
 
 export const deleteList = createAsyncThunk(
@@ -121,7 +121,7 @@ export const deleteList = createAsyncThunk(
     } catch (e) {
       return handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
 
 export const updateList = createAsyncThunk(
@@ -133,5 +133,5 @@ export const updateList = createAsyncThunk(
     } catch (e) {
       return handleThunkError(e, thunkApi)
     }
-  },
+  }
 )

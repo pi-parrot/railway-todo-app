@@ -14,11 +14,11 @@ export const useSignup = () => {
           email,
           password,
           name,
-        }),
+        })
       ).unwrap()
       history.push('/')
     },
-    [useDispatch],
+    [useDispatch]
   )
 
   return {

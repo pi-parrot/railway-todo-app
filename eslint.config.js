@@ -1,8 +1,10 @@
 import js from "@eslint/js";
 import eslintPluginReact from "eslint-plugin-react";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 export default [
   js.configs.recommended,
+  eslintConfigPrettier,
   {
     ignores: ["node_modules/**", "dist/**"],
     languageOptions: {
@@ -28,6 +30,8 @@ export default [
         test: "readonly",
         expect: "readonly",
         process: "readonly",
+        localStorage: "readonly",
+        location: "readonly",
       },
     },
     plugins: {

@@ -13,12 +13,12 @@ export const useLogin = () => {
         login({
           email,
           password,
-        }),
+        })
       ).unwrap()
 
       history.push('/')
     },
-    [useDispatch],
+    [useDispatch]
   )
 
   return {

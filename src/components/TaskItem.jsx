@@ -4,13 +4,14 @@ import { useDispatch } from 'react-redux'
 import { PencilIcon } from '~/icons/PencilIcon'
 import { CheckIcon } from '~/icons/CheckIcon'
 import { updateTask } from '~/store/task'
+import { getRemainingTime } from '~/utils/getRemainingTime'
 import './TaskItem.css'
 
 export const TaskItem = ({ task }) => {
   const dispatch = useDispatch()
 
   const { listId } = useParams()
-  const { id, title, detail, done } = task
+  const { id, title, detail, done, limit } = task
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -53,6 +54,9 @@ export const TaskItem = ({ task }) => {
         </Link>
       </div>
       <div className="task_item__detail">{detail}</div>
+      {limit && (
+        <div className="task_item__limit">期限: {getRemainingTime(limit)}</div>
+      )}
     </div>
   )
 }

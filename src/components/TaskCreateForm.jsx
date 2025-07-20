@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import './TaskCreateForm.css'
 import { CheckIcon } from '~/icons/CheckIcon'
 import { createTask } from '~/store/task'
+import { getRemainingTime, formatToISO } from '~/utils/getRemainingTime'
 
 export const TaskCreateForm = () => {
   const dispatch = useDispatch()
@@ -15,9 +16,10 @@ export const TaskCreateForm = () => {
   const [title, setTitle] = useState('')
   const [detail, setDetail] = useState('')
   const [done, setDone] = useState(false)
+  const [limit, setLimit] = useState('')
 
   const handleToggle = useCallback(() => {
-    setDone(prev => !prev)
+    setDone((prev) => !prev)
   }, [])
 
   const handleFocus = useCallback(() => {
@@ -25,7 +27,7 @@ export const TaskCreateForm = () => {
   }, [])
 
   const handleBlur = useCallback(() => {
-    if (title || detail) {
+    if (title || detail || limit) {
       return
     }
 
@@ -39,32 +41,35 @@ export const TaskCreateForm = () => {
       setFormState('initial')
       setDone(false)
     }, 100)
-  }, [title, detail])
+  }, [title, detail, limit])
 
   const handleDiscard = useCallback(() => {
     setTitle('')
     setDetail('')
+    setLimit('')
     setFormState('initial')
     setDone(false)
   }, [])
 
   const onSubmit = useCallback(
-    event => {
+    (event) => {
       event.preventDefault()
 
       setFormState('submitting')
 
-      void dispatch(createTask({ title, detail, done }))
+      const formattedLimit = formatToISO(limit)
+
+      void dispatch(createTask({ title, detail, done, limit: formattedLimit }))
         .unwrap()
         .then(() => {
           handleDiscard()
         })
-        .catch(err => {
+        .catch((err) => {
           alert(err.message)
           setFormState('focused')
         })
     },
-    [title, detail, done],
+    [title, detail, done, limit]
   )
 
   useEffect(() => {
@@ -105,9 +110,7 @@ export const TaskCreateForm = () => {
               className="task_create_form__mark____complete"
               aria-label="Completed"
             >
-              <CheckIcon
-                className="task_create_form__mark____complete_check"
-              />
+              <CheckIcon className="task_create_form__mark____complete_check" />
             </div>
           ) : (
             <div
@@ -121,7 +124,7 @@ export const TaskCreateForm = () => {
           className="task_create_form__title"
           placeholder="Add a new task..."
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
           onFocus={handleFocus}
           onBlur={handleBlur}
           disabled={formState === 'submitting'}
@@ -135,10 +138,24 @@ export const TaskCreateForm = () => {
             className="task_create_form__detail"
             placeholder="Add a description here..."
             value={detail}
-            onChange={e => setDetail(e.target.value)}
+            onChange={(e) => setDetail(e.target.value)}
             onBlur={handleBlur}
             disabled={formState === 'submitting'}
           />
+          <input
+            type="datetime-local"
+            className="task_create_form__limit"
+            placeholder="Set deadline..."
+            value={limit}
+            onChange={(e) => setLimit(e.target.value)}
+            onBlur={handleBlur}
+            disabled={formState === 'submitting'}
+          />
+          {limit && (
+            <div className="task_create_form__remaining_time">
+              残り時間: {getRemainingTime(limit)}
+            </div>
+          )}
           <div className="task_create_form__actions">
             <button
               type="button"
@@ -146,7 +163,9 @@ export const TaskCreateForm = () => {
               data-variant="secondary"
               onBlur={handleBlur}
               onClick={handleDiscard}
-              disabled={(!title && !detail) || formState === 'submitting'}
+              disabled={
+                (!title && !detail && !limit) || formState === 'submitting'
+              }
             >
               Discard
             </button>

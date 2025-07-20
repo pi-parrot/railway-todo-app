@@ -7,7 +7,7 @@ const Home = () => {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const currentListId = useSelector(state => state.list.current)
+  const currentListId = useSelector((state) => state.list.current)
 
   useEffect(() => {
     dispatch(fetchLists())

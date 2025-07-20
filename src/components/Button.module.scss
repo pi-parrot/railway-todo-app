@@ -1,0 +1,40 @@
+.button {
+  color: #ffffff;
+  background-color: #242f9b;
+  border-style: solid;
+  border-radius: 5px;
+  width: 80px;
+  height: 40px;
+  margin: 25px 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 0.6;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.delete {
+  color: #ffffff;
+  background-color: #ff3333;
+  border-color: #ff3333;
+
+  &:hover {
+    background-color: #e60000;
+    border-color: #e60000;
+  }
+
+  &:active {
+    background-color: #cc0000;
+    border-color: #cc0000;
+  }
+}

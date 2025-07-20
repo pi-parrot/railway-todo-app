@@ -3,10 +3,12 @@ import { Redirect, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useLogin } from '~/hooks/useLogin'
 import { useId } from '~/hooks/useId'
+import { Button } from '~/components/Button'
+import { TextField } from '~/components/TextField'
 import './index.css'
 
 const SignIn = () => {
-  const auth = useSelector(state => state.auth.token !== null)
+  const auth = useSelector((state) => state.auth.token !== null)
   const { login } = useLogin()
 
   const id = useId()
@@ -17,20 +19,20 @@ const SignIn = () => {
   const [password, setPassword] = useState('')
 
   const onSubmit = useCallback(
-    event => {
+    (event) => {
       event.preventDefault()
 
       setIsSubmitting(true)
 
       login({ email, password })
-        .catch(err => {
+        .catch((err) => {
           setErrorMessage(err.message)
         })
         .finally(() => {
           setIsSubmitting(false)
         })
     },
-    [email, password],
+    [email, password]
   )
 
   if (auth) {
@@ -42,40 +44,30 @@ const SignIn = () => {
       <h2 className="signin__title">Login</h2>
       <p className="signin__error">{errorMessage}</p>
       <form className="signin__form" onSubmit={onSubmit}>
-        <fieldset className="signin__form_field">
-          <label htmlFor={`${id}-email`} className="signin__form_label">
-            E-mail Address
-          </label>
-          <input
-            id={`${id}-email`}
-            type="email"
-            autoComplete="email"
-            className="app_input"
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-          />
-        </fieldset>
-        <fieldset className="signin__form_field">
-          <label htmlFor={`${id}-password`} className="signin__form_label">
-            Password
-          </label>
-          <input
-            id={`${id}-password`}
-            type="password"
-            autoComplete="current-password"
-            className="app_input"
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-          />
-        </fieldset>
+        <TextField
+          id={`${id}-email`}
+          type="email"
+          label="Email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
+        <TextField
+          id={`${id}-password`}
+          type="password"
+          label="Password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          required
+        />
         <div className="signin__form_actions">
           <Link className="app_button" data-variant="secondary" to="/signup">
             Register
           </Link>
           <div className="signin__form_actions_spacer"></div>
-          <button type="submit" className="app_button" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting}>
             Login
-          </button>
+          </Button>
         </div>
       </form>
     </main>

@@ -12,7 +12,7 @@ export const taskSlice = createSlice({
   name: 'task',
   initialState,
   reducers: {
-    resetTask: (state, _action) => {
+    resetTask: (state) => {
       state.tasks = null
       state.listId = null
       state.isLoading = false
@@ -31,12 +31,13 @@ export const taskSlice = createSlice({
       const id = action.payload.id
       const detail = action.payload.detail
       const done = action.payload.done
+      const limit = action.payload.limit
 
-      state.tasks.push({ title, id, detail, done })
+      state.tasks.push({ title, id, detail, done, limit })
     },
     mutateTask: (state, action) => {
       const id = action.payload.id
-      const idx = state.tasks.findIndex(list => list.id === id)
+      const idx = state.tasks.findIndex((list) => list.id === id)
       if (idx === -1) {
         return
       }
@@ -49,7 +50,7 @@ export const taskSlice = createSlice({
     removeTask: (state, action) => {
       const id = action.payload.id
 
-      state.tasks = state.tasks.filter(list => list.id !== id)
+      state.tasks = state.tasks.filter((list) => list.id !== id)
     },
   },
 })
@@ -90,7 +91,7 @@ export const fetchTasks = createAsyncThunk(
     } finally {
       thunkApi.dispatch(setTaskIsLoading(false))
     }
-  },
+  }
 )
 
 export const createTask = createAsyncThunk(
@@ -109,12 +110,12 @@ export const createTask = createAsyncThunk(
         addTask({
           ...payload,
           id,
-        }),
+        })
       )
     } catch (e) {
       handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
 
 export const updateTask = createAsyncThunk(
@@ -127,7 +128,7 @@ export const updateTask = createAsyncThunk(
 
     const oldValue = thunkApi
       .getState()
-      .task.tasks.find(task => task.id === payload.id)
+      .task.tasks.find((task) => task.id === payload.id)
 
     if (!oldValue) {
       return
@@ -142,7 +143,7 @@ export const updateTask = createAsyncThunk(
     } catch (e) {
       handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
 
 export const deleteTask = createAsyncThunk(
@@ -159,5 +160,5 @@ export const deleteTask = createAsyncThunk(
     } catch (e) {
       handleThunkError(e, thunkApi)
     }
-  },
+  }
 )
