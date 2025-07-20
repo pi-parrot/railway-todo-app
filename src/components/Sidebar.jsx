@@ -4,12 +4,15 @@ import { Link, useLocation } from 'react-router-dom'
 import { PlusIcon } from '~/icons/PlusIcon'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLogout } from '~/hooks/useLogout'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { fetchLists } from '~/store/list/index'
+import { ListCreateModal } from './ListCreateModal'
 
 export const Sidebar = () => {
   const dispatch = useDispatch()
   const { pathname } = useLocation()
+
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
 
   const lists = useSelector((state) => state.list.lists)
   const activeId = useSelector((state) => state.list.current)
@@ -49,10 +52,13 @@ export const Sidebar = () => {
                   </li>
                 ))}
                 <li>
-                  <Link to="/list/new" className="sidebar__lists_button">
+                  <button
+                    onClick={() => setIsCreateModalOpen(true)}
+                    className="sidebar__lists_button"
+                  >
                     <PlusIcon className="sidebar__lists_plus_icon" />
                     New List...
-                  </Link>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -76,6 +82,10 @@ export const Sidebar = () => {
           </Link>
         </>
       )}
+      <ListCreateModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+      />
     </div>
   )
 }

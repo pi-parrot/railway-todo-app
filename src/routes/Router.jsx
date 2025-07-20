@@ -6,10 +6,7 @@ import { Header } from '~/components/Header'
 import Home from '~/pages/index.page'
 import NotFound from '~/pages/404'
 import SignIn from '~/pages/signin/index.page'
-import NewList from '~/pages/list/new/index.page'
-import EditTask from '~/pages/lists/[listId]/tasks/[taskId]/index.page'
 import SignUp from '~/pages/signup/index.page'
-import EditList from '~/pages/lists/[listId]/edit/index.page'
 import ListIndex from '~/pages/lists/[listId]/index.page'
 
 export const Router = () => {
@@ -42,15 +39,6 @@ export const Router = () => {
                 </Route>
                 <Route exact path="/lists/:listId">
                   <ListIndex />
-                </Route>
-                <Route exact path="/list/new">
-                  <NewList />
-                </Route>
-                <Route exact path="/lists/:listId/tasks/:taskId">
-                  <EditTask />
-                </Route>
-                <Route exact path="/lists/:listId/edit">
-                  <EditList />
                 </Route>
               </>
             ) : (

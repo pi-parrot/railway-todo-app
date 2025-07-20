@@ -31,14 +31,28 @@
   width: 1.5rem;
   height: 1.5rem;
   fill: var(--slate-500);
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
 }
 
 .task_item__title_action:hover {
   opacity: 0.8;
+  background-color: var(--slate-100);
 }
 
 .task_item__title_action:active {
   opacity: 0.6;
+}
+
+.task_item__title_action:focus {
+  outline: 2px solid var(--indigo-600);
+  outline-offset: 2px;
 }
 
 .task__item__mark_button {

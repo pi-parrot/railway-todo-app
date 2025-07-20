@@ -1,0 +1,17 @@
+.list_edit_modal__error {
+  color: var(--red-500);
+  margin-bottom: 1rem;
+}
+
+.list_edit_modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.list_edit_modal__form_actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+}
