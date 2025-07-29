@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { PencilIcon } from '~/icons/PencilIcon'
 import { CheckIcon } from '~/icons/CheckIcon'

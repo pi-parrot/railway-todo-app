@@ -1,5 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useCallback, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Modal } from './Modal'
 import { TextField } from './TextField'
@@ -15,7 +14,6 @@ import './TaskEditModal.css'
 
 export const TaskEditModal = ({ isOpen, onClose, taskId, listId }) => {
   const id = useId()
-  const history = useHistory()
   const dispatch = useDispatch()
 
   const [title, setTitle] = useState('')

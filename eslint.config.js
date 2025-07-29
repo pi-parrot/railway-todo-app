@@ -6,6 +6,7 @@ export default [
   js.configs.recommended,
   eslintConfigPrettier,
   {
+    files: ["**/*.{js,jsx}"], // JSXファイルを明示的に対象に含める
     ignores: ["node_modules/**", "dist/**"],
     languageOptions: {
       ecmaVersion: 2022,
@@ -32,6 +33,7 @@ export default [
         process: "readonly",
         localStorage: "readonly",
         location: "readonly",
+        alert: "readonly",
       },
     },
     plugins: {
