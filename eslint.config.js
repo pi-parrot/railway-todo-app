@@ -6,7 +6,9 @@ export default [
   js.configs.recommended,
   eslintConfigPrettier,
   {
-    files: ["**/*.{js,jsx}"], // JSXファイルを明示的に対象に含める
+    // jsx ファイルを明示的に対象に含める
+    // ts, tsx などを使う場合はそれも必要
+    files: ["**/*.{js,jsx}"],
     ignores: ["node_modules/**", "dist/**"],
     languageOptions: {
       ecmaVersion: 2022,
